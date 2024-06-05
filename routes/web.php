@@ -15,6 +15,9 @@ use App\Http\Controllers\FreelanceController;
 */
 
 Route::get('/employe-freelance', [FreelanceController::class, 'index'])->name('employe-freelance');
+Route::post('/freelance/save', [FreelanceController::class, 'save'])->name('freelance.save');
+Route::get('/freelance/edit/{id}', [FreelanceController::class, 'edit'])->name('freelance.edit');
+Route::put('/freelance/{id}', [FreelanceController::class, 'update'])->name('freelance.update');
 
 
 Route::get('/', function () {
@@ -25,13 +28,16 @@ Route::get('/freelancer-detail', function () {
     return view('layouts.foremployé_freelance_detail');
 })->name('freelancer-detail');
 
+Route::get('/freelancer-freelance', function () {
+    return view('layouts.foremployé_frelance_freelance');
+})->name('freelancer.freelance');
+
 Route::get('/freelance-setting', function () {
     return view('layouts.foremployé_setting');
 })->name('employe-setting');
 
-Route::post('/freelance/save', [FreelanceController::class, 'save'])->name('freelance.save');
 
-Route::put('/freelance/{freelance}', [FreelanceController::class, 'update'])->name('freelance.update');
+
 
 
 

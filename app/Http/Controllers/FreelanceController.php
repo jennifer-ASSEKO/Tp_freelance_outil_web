@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Freelance;
@@ -19,58 +18,44 @@ class FreelanceController extends Controller
 
     public function save(Request $request)
     {
-        // Valider les données du formulaire
-        $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:20',
-            'email_address' => 'required|email|max:255',
-        ]);
-
-        // Créer un nouveau freelance
-        $freelance = new Freelance();
-        $freelance->first_name = $validatedData['first_name'];
-        $freelance->last_name = $validatedData['last_name'];
-        $freelance->phone_number = $validatedData['phone_number'];
-        $freelance->email_address = $validatedData['email_address'];
-
-        // Enregistrer le freelance dans la base de données
-        $freelance->save();
-
-        // Rediriger vers une page de succès ou afficher un message de succès
-        return redirect()->with('success', 'Freelance enregistré avec succès.');
+        $data = [
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'phone_number' => $request->input('phone_number'),
+            'email_address' => $request->input('email_address'),
+        ];
+        Freelance::create($data);
+        return redirect()->back()->with(['message', 'ajout effectué']);
     }
 
     public function edit($id)
     {
         // Récupérer le freelance à éditer
         $freelance = Freelance::find($id);
-        if (!$freelance) {
-            // Gérer le cas où le freelance n'est pas trouvé
-            abort(404);
-        }
         // Récupérer tous les freelances pour afficher la liste
         $freelances = Freelance::all();
-        return view('freelance.edit', compact('freelances', 'freelance'));
+        return view('layouts.foremployé_frelance_freelance', compact('freelances', 'freelance'));
     }
 
-    public function update(Request $request, $id)
-{
-    // Valider les données du formulaire
-    $validatedData = $request->validate([
-        'first_name' => 'required|string|max:255',
-        'last_name' => 'required|string|max:255',
-        'phone_number' => 'required|string|max:20',
-        'email_address' => 'required|email|max:255',
-    ]);
+    public function update(Request $request, $id){
+        // Trouve l'instance du freelance à mettre à jour en utilisant l'ID passé en paramètre
+        $freelance = Freelance::find($id);
 
-    // Mettre à jour les informations du freelance
-    $freelance = Freelance::findOrFail($id);
-    $freelance->update($validatedData);
+        // Crée un tableau associatif avec les données du formulaire
+        $data = [
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'phone_number' => $request->input('phone_number'),
+            'email_address' => $request->input('email_address'),
+        ];
 
-    // Rediriger vers une page de succès ou afficher un message de succès
-    return redirect()->route('freelance.success')->with('success', 'Freelance mis à jour avec succès.');
-}
+        // Met à jour les attributs du freelance avec les nouvelles données
+        $freelance->update($data);
+
+        // Redirige l'utilisateur vers la page d'index des freelances avec un message de confirmation
+        return redirect()->back()->with(['message'=>'mise à jour effectuée']);
+    }
+
 
 
 }

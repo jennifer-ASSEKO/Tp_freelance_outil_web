@@ -407,33 +407,34 @@
                         </div>
 
                         @foreach ($freelances as $freelance)
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <div class="freelance-widget">
-                                        <div class="freelance-content">
-                                            <div class="freelance-img">
-                                                <a href="developer-details.html">
-                                                    <img src="{{ asset('assets/img/user/avatar-2.jpg') }}" alt="User Image">
-                                                    <!-- Remplacez 'assets/img/user/avatar-2.jpg' par le chemin réel de l'image du freelance -->
-                                                    <span class="verified"><i class="fas fa-check-circle"></i></span>
-                                                </a>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="freelance-widget">
+                                            <div class="freelance-content">
+                                                <div class="freelance-img">
+                                                    <a href="developer-details.html">
+                                                        <img src="{{ asset('assets/img/user/avatar-2.jpg') }}" alt="User Image">
+                                                        <!-- Remplacez 'assets/img/user/avatar-2.jpg' par le chemin réel de l'image du freelance -->
+                                                        <span class="verified"><i class="fas fa-check-circle"></i></span>
+                                                    </a>
+                                                </div>
+                                                <div class="freelance-info">
+                                                    <h3><a href="developer-details.html">{{ $freelance->first_name }} {{ $freelance->last_name }}</a></h3>
+                                                    <div class="freelance-specific">{{ $freelance->phone_number }}</div>
+                                                    <div class="freelance-location">{{ $freelance->email_address }}</div>
+                                                </div>
                                             </div>
-                                            <div class="freelance-info">
-                                                <h3><a href="developer-details.html">{{ $freelance->first_name }} {{ $freelance->last_name }}</a></h3>
-                                                <div class="freelance-specific">{{ $freelance->phone_number }}</div>
-                                                <div class="freelance-location">{{ $freelance->email_address }}</div>
+                                            <div class="cart-hover">
+                                                <!-- Lien "Modifier" -->
+                                                <a href="{{ route('freelance.edit', $freelance->id) }}" class="btn btn-primary">Modifier</a>
+                                                <a href="developer-details.html" class="btn-cart" tabindex="-1">View Profile</a>
                                             </div>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <a href="javascript:void(0);" class="btn-invite mb-2 w-100 d-block" tabindex="-1">Invite</a>
-                                            <a href="developer-details.html" class="btn-cart" tabindex="-1">View Profile</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
 
 
                     </div>
