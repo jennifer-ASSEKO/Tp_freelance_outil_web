@@ -21,6 +21,8 @@ class FreelanceFactory extends Factory
             'last_name' => $this->faker->lastName,
             'phone_number' => $this->faker->phoneNumber,
             'email_address' => $this->faker->unique()->safeEmail,
+            'profile_picture' => null, // Générez une URL d'image aléatoire si vous avez des images par défaut
+            'freelance_pdf' => null, // Générez des fichiers PDF aléatoires si nécessaire
         ];
     }
 }

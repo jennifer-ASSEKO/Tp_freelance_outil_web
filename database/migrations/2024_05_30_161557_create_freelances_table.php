@@ -16,14 +16,13 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone_number');
-            $table->string('email_address')->unique();
+            $table->string('email_address');
+            $table->string('profile_picture')->nullable();
+            $table->string('freelance_pdf')->nullable();
             $table->timestamps();
-
-
-
-
         });
     }
+
 
     /**
      * Reverse the migrations.

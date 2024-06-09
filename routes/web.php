@@ -3,43 +3,25 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FreelanceController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::get('/employe-freelance', [FreelanceController::class, 'index'])->name('employe-freelance');
-Route::post('/freelance/save', [FreelanceController::class, 'save'])->name('freelance.save');
-Route::get('/freelance/edit/{id}', [FreelanceController::class, 'edit'])->name('freelance.edit');
-Route::put('/freelance/{id}', [FreelanceController::class, 'update'])->name('freelance.update');
-
+Route::get('/employe-freelance', [FreelanceController::class, 'index'])->name('employe-freelance'); // Liste des freelances
+Route::post('/freelance/save', [FreelanceController::class, 'save'])->name('freelance.save'); // Sauvegarde d'un nouveau freelance
+Route::get('/freelance/edit/{id}', [FreelanceController::class, 'edit'])->name('freelance.edit'); // Formulaire d'édition d'un freelance existant
+Route::put('/freelance/update/{id}', [FreelanceController::class, 'update'])->name('freelance.update'); // Mise à jour d'un freelance existant
+Route::get('/freelance/{id}/details', [FreelanceController::class, 'show'])->name('freelance.show'); // Affichage des détails d'un freelance
+Route::delete('/freelance/{id}', [FreelanceController::class, 'destroy'])->name('freelance.destroy'); // Suppression d'un freelance
 
 Route::get('/', function () {
     return view('freelance.index');
-});
+})->name('acceuil');
 
 Route::get('/freelancer-detail', function () {
-    return view('layouts.foremployé_freelance_detail');
+    return view('freelance_details.foremployé_freelance_detail');
 })->name('freelancer-detail');
 
 Route::get('/freelancer-freelance', function () {
-    return view('layouts.foremployé_frelance_freelance');
+    return view('freelance.foremployé_frelance_freelance');
 })->name('freelancer.freelance');
 
-Route::get('/freelance-setting', function () {
-    return view('layouts.foremployé_setting');
+Route::get('/freelance-ok', function () {
+    return view('setting.index');
 })->name('employe-setting');
-
-
-
-
-
-
-
-
